@@ -1,0 +1,29 @@
+{
+  "name": "async-shared-lock",
+  "version": "1.0.3",
+  "description": "Shared locks for JavaScript asynchronous code",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniel-zd/async-shared-lock.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "async lock",
+    "shared lock"
+  ],
+  "author": "Daniel Zhao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daniel-zd/async-shared-lock/issues"
+  },
+  "homepage": "https://github.com/daniel-zd/async-shared-lock#readme",
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  }
+}

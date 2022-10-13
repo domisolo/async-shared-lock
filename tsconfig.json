@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "declaration": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "outDir": "dist"
+  }
+}
