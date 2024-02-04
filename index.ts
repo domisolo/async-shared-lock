@@ -1,25 +1,30 @@
-class AsyncSharedLock {
-  private wait: Promise<any> | null;
-  private resolver: any;
+type noop = (value?: unknown) => void;
 
-  acquire() {
-    if (this.wait) {
-      return this.wait;
-    }
+class AsyncLock {
+  private wait: Promise<unknown> | null = null;
+  private resolver: noop | null = null;
+  private timeoutTimer: number = 0;
 
-    let resolver: unknown = null;
-    this.wait = new Promise((r) => (resolver = r));
-    this.resolver = resolver;
-
-    return Promise.resolve();
+  constructor() {
+    this.wait = new Promise((r: noop) => (this.resolver = r));
   }
 
-  release() {
-    const resolver = this.resolver;
-    resolver && resolver();
+  public acquire(ms: number) {
+    if (ms > 0 && this.wait !== null) {
+      this.timeoutTimer = window.setTimeout(() => this.release(), ms);
+    }
+    return this.wait;
+  }
+
+  public release() {
+    this.resolver?.();
     this.resolver = null;
     this.wait = null;
+    if (this.timeoutTimer > 0) {
+      window.clearTimeout(this.timeoutTimer);
+      this.timeoutTimer = 0;
+    }
   }
 }
 
-export default AsyncSharedLock;
+export default AsyncLock;
